@@ -1,0 +1,18 @@
+sequenceDiagram
+  participant C as Company (Buyer)
+  participant F as Find Vendor Mode
+  participant V as Vendors
+  participant R as RFP Document
+  participant S as Score Contracts Mode
+
+  C->>F: Describe project requirements
+  F-->>C: Shortlisted vendors
+
+  C->>R: Draft RFP based on requirements
+  C->>V: Send RFP to shortlisted vendors
+
+  V-->>C: Send proposals & draft contracts
+
+  C->>S: Upload vendor contracts & criteria
+  S-->>C: Scores, comparisons & best contract recommendation
+

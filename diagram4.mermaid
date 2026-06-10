@@ -1,0 +1,57 @@
+flowchart TB
+ subgraph USER["User Layer"]
+        U["User"]
+  end
+ subgraph BACKEND["Backend"]
+        API["FastAPI Backend<br>AI Processing Engine"]
+  end
+ subgraph FRONTEND["Frontend"]
+        UI["React Frontend<br>User Interface"]
+  end
+ subgraph APP["Application Layer"]
+    direction TB
+        BACKEND
+        FRONTEND
+  end
+ subgraph DATA["Data Layer"]
+    direction TB
+        QDRANT["Qdrant Vector DB<br>Document Embeddings · Semantic Index"]
+        STORAGE["Persistent Storage<br>Documents · Results · Artifacts"]
+  end
+ subgraph AI["AI/ML Services"]
+    direction TB
+        AI5["Vendor Research<br>"]
+
+        AI1["Document Processing<br>Parsing · Embedding"]
+        AI2["Vector Search<br>Semantic Matching"]
+        AI3["Document QA<br>Vendor Evaluation"]
+  end
+ subgraph EXT["External APIs"]
+        OPENROUTER["OpenRouter API<br>AI Inference"]
+        GDRIVE["Perplexity API<br> Integration"]
+        SMTP["Email Services<br>SMTP Delivery"]
+  end
+    U --> UI
+    UI --> API
+    API --> QDRANT & STORAGE & AI1 & AI2 & AI3 & AI5 & OPENROUTER & GDRIVE & SMTP
+    AI1 --> AI2
+    AI2 --> AI3
+
+     U:::user
+     API:::app
+     UI:::app
+     QDRANT:::data
+     STORAGE:::data
+     AI1:::ai
+     AI2:::ai
+     AI3:::ai
+     AI5:::ai
+
+     OPENROUTER:::ext
+     GDRIVE:::ext
+     SMTP:::ext
+    classDef user fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
+    classDef app fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+    classDef data fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    classDef ai fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    classDef ext fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#fff

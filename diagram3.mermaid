@@ -1,0 +1,26 @@
+graph LR
+  subgraph client[Client]
+    B[Browser UI - React Frontend]
+  end
+
+  subgraph fe[Frontend Container]
+    FE[React App - AskQuestionMode & ScoreContractsMode]
+  end
+
+  subgraph be[Backend Container]
+    API[FastAPI Service - rag_service, parser_service, embedder_service, helper_service]
+  end
+
+  subgraph data[Data Layer]
+    QDRANT[(Qdrant Vector DB)]
+    FILES[(Local Data: /data, credentials)]
+  end
+
+  B --> FE
+  FE -->|"HTTP (REST/JSON)"| API
+
+  API -->|"Vector search / embeddings"| QDRANT
+  API -->|"Read/write files"| FILES
+
+
+
